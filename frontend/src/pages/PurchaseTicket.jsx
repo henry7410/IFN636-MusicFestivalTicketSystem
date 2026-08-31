@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import axiosInstance from '../axiosConfig';
 
 const PurchaseTicket = () => {
     // SCRUM-101 Implement ticket quantity selection
@@ -21,7 +21,7 @@ const PurchaseTicket = () => {
     };
 
     // SCRUM-104 Purchase success and error handling
-    const handlePurchase = () => {
+    const handlePurchase = async () => {
 
         if (quantity < 1) {
             setMessage('Please select at least 1 ticket.');
@@ -33,9 +33,24 @@ const PurchaseTicket = () => {
             return;
         }
 
-        setAvailableTickets(
-            availableTickets - Number(quantity)
-        );
+        try {
+
+            await axiosInstance.post('/api/bookings', {
+                eventName: event.name,
+                quantity: quantity
+            });
+
+            setAvailableTickets(
+                availableTickets - Number(quantity)
+            );
+
+            setMessage('Ticket purchased successfully.');
+
+        } catch (error) {
+
+            setMessage('Purchase failed.');
+
+        }
 
         setMessage('Ticket purchased successfully.');
     };
