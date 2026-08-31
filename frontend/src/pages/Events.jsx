@@ -10,15 +10,25 @@ const Events = () => {
 
     const [events, setEvents] = useState([]);
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = async (id) => {
 
         const confirmed = window.confirm(
             'Are you sure you want to delete this event?'
         );
 
-        if (confirmed) {
+        if (!confirmed) return;
 
-            alert('Delete confirmed');
+        try {
+
+            await axiosInstance.delete(
+                `/api/events/${id}`
+            );
+
+            alert('Event deleted successfully');
+
+        } catch (error) {
+
+            alert('Failed to delete event');
 
         }
 
@@ -104,7 +114,9 @@ const Events = () => {
                     </Link>
 
                     <button
-                        onClick={handleDeleteClick}
+                        onClick={() =>
+                            handleDeleteClick(event._id)
+                        }
                     >
                         Delete
                     </button>
