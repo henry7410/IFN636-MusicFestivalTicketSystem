@@ -24,6 +24,14 @@ const Events = () => {
                 `/api/events/${id}`
             );
 
+            // SCRUM-147 Remove deleted event from event listing
+            setEvents(
+                events.filter(
+                    (event) =>
+                        event._id !== id
+                )
+            );
+
             alert('Event deleted successfully');
 
         } catch (error) {
