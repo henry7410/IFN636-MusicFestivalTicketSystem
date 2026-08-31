@@ -1,10 +1,42 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axiosInstance from '../axiosConfig';
 
 // SCRUM-134 Create organizer event dashboard
+// SCRUM-135 Connect dashboard to backend API
+// SCRUM-137 Display created events list
 
 const Events = () => {
 
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+
+        const fetchEvents = async () => {
+
+            try {
+
+                const response =
+                    await axiosInstance.get(
+                        '/api/events'
+                    );
+
+                setEvents(response.data);
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        };
+
+        fetchEvents();
+
+    }, []);
+
     return (
+
         <div>
 
             <h1>My Events</h1>
@@ -15,37 +47,54 @@ const Events = () => {
                 </button>
             </Link>
 
-            <div
-                style={{
-                    border: '1px solid gray',
-                    margin: '10px',
-                    padding: '10px'
-                }}
-            >
-                <h2>Brisbane Music Festival</h2>
+            {events.map((event) => (
 
-                <p>Venue: Brisbane</p>
+                <div
+                    key={event._id}
+                    style={{
+                        border: '1px solid gray',
+                        margin: '10px',
+                        padding: '10px'
+                    }}
+                >
+                    <h2>
+                        {event.eventName}
+                    </h2>
 
-                <p>Date: Dec 01, 2026</p>
+                    <p>
+                        Venue: {event.venue}
+                    </p>
 
-                <p>Remaining Tickets: 100</p>
+                    <p>
+                        Date: {event.date}
+                    </p>
 
-                <button>
-                    View Details
-                </button>
+                    <p>
+                        Remaining Tickets:
+                        {' '}
+                        {event.ticketQuantity}
+                    </p>
 
-                <button>
-                    Edit
-                </button>
+                    <button>
+                        View Details
+                    </button>
 
-                <button>
-                    Delete
-                </button>
+                    <button>
+                        Edit
+                    </button>
 
-            </div>
+                    <button>
+                        Delete
+                    </button>
+
+                </div>
+
+            ))}
 
         </div>
+
     );
+
 };
 
 export default Events;
