@@ -24,6 +24,8 @@ const EditEvent = () => {
     const [ticketQuantity, setTicketQuantity] =
         useState('100');
 
+    const [message, setMessage] = useState('');
+
         const handleUpdateEvent = async () => {
 
             try {
@@ -48,11 +50,11 @@ const EditEvent = () => {
                     }
                 );
 
-                alert('Event updated successfully');
+                setMessage('Event updated successfully');
 
             } catch (error) {
 
-                alert('Failed to update event');
+                setMessage('Failed to update event');
 
             }
 
@@ -149,6 +151,7 @@ const EditEvent = () => {
             <button onClick={handleUpdateEvent}>
                 Update Event
             </button>
+            <p>{message}</p>
 
         </div>
     );
