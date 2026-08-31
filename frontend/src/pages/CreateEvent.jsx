@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axiosInstance from '../axiosConfig';
 
 // SCRUM-127 Create event creation form
 
@@ -10,7 +11,33 @@ const CreateEvent = () => {
     const [description, setDescription] = useState('');
     const [ticketPrice, setTicketPrice] = useState('');
     const [ticketQuantity, setTicketQuantity] = useState('');
+    const [message, setMessage] = useState('');
 
+    const handleCreateEvent = async () => {
+
+        try {
+
+            await axiosInstance.post(
+                '/api/events',
+                {
+                    eventName,
+                    venue,
+                    date,
+                    description,
+                    ticketPrice,
+                    ticketQuantity
+                }
+            );
+
+            setMessage('Event created successfully');
+
+        } catch (error) {
+
+            setMessage('Failed to create event');
+
+        }
+
+    };
     return (
         <div>
             <h1>Create Event</h1>
@@ -98,9 +125,11 @@ const CreateEvent = () => {
 
             <br />
 
-            <button>
+            <button onClick={handleCreateEvent}>
                 Publish Event
             </button>
+
+            <p>{message}</p>
 
         </div>
     );
