@@ -1,6 +1,12 @@
-// SCRUM-114 Create manage ticket information page
+import { useState } from 'react';
+
+// SCRUM-115 Create editable ticket information form
 
 const ManageTicket = () => {
+
+    const [recipientName, setRecipientName] = useState('');
+
+    const [recipientEmail, setRecipientEmail] = useState('');
 
     return (
         <div>
@@ -8,10 +14,54 @@ const ManageTicket = () => {
 
             <h2>Transfer Ticket</h2>
 
-            <p>
-                Use this page to transfer your ticket
-                to another person.
-            </p>
+            <div>
+
+                <label>
+                    Recipient Name
+                </label>
+
+                <br />
+
+                <input
+                    type="text"
+                    value={recipientName}
+                    onChange={(e) =>
+                        setRecipientName(
+                            e.target.value
+                        )
+                    }
+                />
+
+            </div>
+
+            <br />
+
+            <div>
+
+                <label>
+                    Recipient Email
+                </label>
+
+                <br />
+
+                <input
+                    type="email"
+                    value={recipientEmail}
+                    onChange={(e) =>
+                        setRecipientEmail(
+                            e.target.value
+                        )
+                    }
+                />
+
+            </div>
+
+            <br />
+
+            <button>
+                Transfer Ticket
+            </button>
+
         </div>
     );
 };
