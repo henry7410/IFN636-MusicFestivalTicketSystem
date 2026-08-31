@@ -72,7 +72,11 @@ const MyTickets = () => {
                         </button>
                     </Link>
 
-                    <button>
+                    <button
+                        onClick={() =>
+                            alert('Cancel Ticket Clicked')
+                        }
+                    >
                         Cancel Ticket
                     </button>
 
