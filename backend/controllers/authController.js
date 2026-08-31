@@ -7,6 +7,7 @@ const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
+// add role
 const registerUser = async (req, res) => {
     const { name, email, password, role } = req.body;
     try {
