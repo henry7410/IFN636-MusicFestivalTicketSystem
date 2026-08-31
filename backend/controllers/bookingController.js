@@ -43,7 +43,47 @@ const getBookings = async (req, res) => {
 
 };
 
+// SCRUM-118 Implement ticket transfer business logic
+const transferTicket = async (req, res) => {
+
+    try {
+
+        const booking = await Booking.findById(
+            req.params.id
+        );
+
+        if (!booking) {
+
+            return res.status(404).json({
+                message: 'Ticket not found'
+            });
+
+        }
+
+        booking.recipientName =
+            req.body.recipientName;
+
+        booking.recipientEmail =
+            req.body.recipientEmail;
+
+        await booking.save();
+
+        res.json({
+            message: 'Ticket transferred'
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
 module.exports = {
     createBooking,
-    getBookings
+    getBookings,
+    transferTicket
 };
