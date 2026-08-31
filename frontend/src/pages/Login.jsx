@@ -10,10 +10,23 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.email.includes('@')) {
+      alert('Please enter a valid email');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      alert('Password must be at least 6 characters');
+      return;
+    }
     try {
       const response = await axiosInstance.post('/api/auth/login', formData);
       login(response.data);
-      navigate('/tasks');
+      if (response.data.role === 'organizer') {
+        navigate('/events');
+      } else {
+        navigate('/tasks');
+      }
     } catch (error) {
       alert('Login failed. Please try again.');
     }
