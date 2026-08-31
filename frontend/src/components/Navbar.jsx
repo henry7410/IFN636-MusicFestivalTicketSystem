@@ -18,6 +18,7 @@ const Navbar = () => {
         {user ? (
           <>
             <Link to="/tasks" className="mr-4">Tasks</Link>
+            <Link to="/purchase" className="mr-4">Purchase Ticket</Link>
             <Link to="/profile" className="mr-4">Profile</Link>
             {/* SCRUM-95 Create logout button */}
             <button
