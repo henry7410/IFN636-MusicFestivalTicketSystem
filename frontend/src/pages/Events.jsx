@@ -82,9 +82,11 @@ const Events = () => {
                     </Link>
 
 
-                    <button>
-                        Edit
-                    </button>
+                    <Link to="/editevent">
+                        <button>
+                            Edit
+                        </button>
+                    </Link>
 
                     <button>
                         Delete
