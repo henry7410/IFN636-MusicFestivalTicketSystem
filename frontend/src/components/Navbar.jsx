@@ -4,10 +4,11 @@ import { useAuth } from '../context/AuthContext';
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-
+  // SCRUM-98 Logout business logic
+  // SCRUM-96 Redirect after logout XX
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   };
 
   return (
@@ -18,6 +19,7 @@ const Navbar = () => {
           <>
             <Link to="/tasks" className="mr-4">Tasks</Link>
             <Link to="/profile" className="mr-4">Profile</Link>
+            {/* SCRUM-95 Create logout button */}
             <button
               onClick={handleLogout}
               className="bg-red-500 px-4 py-2 rounded hover:bg-red-700"
