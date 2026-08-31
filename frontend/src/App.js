@@ -11,6 +11,7 @@ import MyTickets from './pages/MyTickets';
 import ManageTicket from './pages/ManageTicket';
 import CreateEvent from './pages/CreateEvent';
 import AvailableEvents from './pages/AvailableEvents';
+import OrganizerEventDetails from './pages/OrganizerEventDetails';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/manageticket" element={<ManageTicket />} />
         <Route path="/createevent" element={<CreateEvent />} />
         <Route path="/available-events" element={<AvailableEvents />} />
+        <Route path="/organizereventdetails" element={<OrganizerEventDetails />}/>
       </Routes>
     </Router>
   );
