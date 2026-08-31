@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
 // SCRUM-110 Create purchased tickets page
@@ -65,9 +66,11 @@ const MyTickets = () => {
                         View Ticket
                     </button>
 
-                    <button>
-                        Transfer Ticket
-                    </button>
+                    <Link to="/manageticket">
+                        <button>
+                            Transfer Ticket
+                        </button>
+                    </Link>
 
                     <button>
                         Cancel Ticket
