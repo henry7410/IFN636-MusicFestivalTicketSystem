@@ -10,6 +10,21 @@ const Events = () => {
 
     const [events, setEvents] = useState([]);
 
+    const handleDeleteClick = () => {
+
+        const confirmed = window.confirm(
+            'Are you sure you want to delete this event?'
+        );
+
+        if (confirmed) {
+
+            alert('Delete confirmed');
+
+        }
+
+    };
+
+
     useEffect(() => {
 
         const fetchEvents = async () => {
@@ -88,7 +103,9 @@ const Events = () => {
                         </button>
                     </Link>
 
-                    <button>
+                    <button
+                        onClick={handleDeleteClick}
+                    >
                         Delete
                     </button>
 
