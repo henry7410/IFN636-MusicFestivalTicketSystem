@@ -10,6 +10,28 @@ const MyTickets = () => {
 
     const [tickets, setTickets] = useState([]);
 
+    const handleCancel = async (id) => {
+
+        try {
+
+            await axiosInstance.delete(
+                `/api/bookings/${id}`
+            );
+
+            setTickets(
+                tickets.filter(
+                    (ticket) =>
+                        ticket._id !== id
+                )
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    };
     useEffect(() => {
 
         const fetchTickets = async () => {
@@ -74,7 +96,7 @@ const MyTickets = () => {
 
                     <button
                         onClick={() =>
-                            alert('Cancel Ticket Clicked')
+                            handleCancel(ticket._id)
                         }
                     >
                         Cancel Ticket
