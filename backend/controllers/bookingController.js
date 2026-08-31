@@ -24,7 +24,26 @@ const createBooking = async (req, res) => {
 
 };
 
-module.exports = {
-    createBooking
+// SCRUM-108 Connect ticket viewing pages to backend API
+const getBookings = async (req, res) => {
+
+    try {
+
+        const bookings = await Booking.find();
+
+        res.json(bookings);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
 };
-``
+
+module.exports = {
+    createBooking,
+    getBookings
+};
