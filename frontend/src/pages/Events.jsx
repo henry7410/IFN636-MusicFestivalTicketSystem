@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// Organizer Dashboard
+// SCRUM-134 Create organizer event dashboard
 
 const Events = () => {
 
@@ -24,9 +24,15 @@ const Events = () => {
             >
                 <h2>Brisbane Music Festival</h2>
 
+                <p>Venue: Brisbane</p>
+
                 <p>Date: Dec 01, 2026</p>
 
                 <p>Remaining Tickets: 100</p>
+
+                <button>
+                    View Details
+                </button>
 
                 <button>
                     Edit
