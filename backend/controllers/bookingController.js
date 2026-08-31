@@ -82,8 +82,44 @@ const transferTicket = async (req, res) => {
 
 };
 
+// SCRUM-122 Implement ticket cancellation business logic
+const cancelTicket = async (req, res) => {
+
+    try {
+
+        const booking = await Booking.findById(
+            req.params.id
+        );
+
+        if (!booking) {
+
+            return res.status(404).json({
+                message: 'Ticket not found'
+            });
+
+        }
+
+        await Booking.findByIdAndDelete(
+            req.params.id
+        );
+
+        res.json({
+            message: 'Ticket cancelled'
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
 module.exports = {
     createBooking,
     getBookings,
-    transferTicket
+    transferTicket,
+    cancelTicket
 };

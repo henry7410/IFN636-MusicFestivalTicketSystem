@@ -10,6 +10,31 @@ const MyTickets = () => {
 
     const [tickets, setTickets] = useState([]);
 
+    const handleCancel = async (id) => {
+
+        try {
+
+            await axiosInstance.delete(
+                `/api/bookings/${id}`
+            );
+
+            setTickets(
+                tickets.filter(
+                    (ticket) =>
+                        ticket._id !== id
+                )
+            );
+            alert(
+                'Ticket cancelled and returned to available inventory.'
+            );
+
+        } catch (error) {
+
+            console.error(error);
+
+        }
+
+    };
     useEffect(() => {
 
         const fetchTickets = async () => {
@@ -72,7 +97,11 @@ const MyTickets = () => {
                         </button>
                     </Link>
 
-                    <button>
+                    <button
+                        onClick={() =>
+                            handleCancel(ticket._id)
+                        }
+                    >
                         Cancel Ticket
                     </button>
 
