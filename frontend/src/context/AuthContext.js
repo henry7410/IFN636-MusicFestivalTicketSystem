@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
+  // SCRUM-94 Clear user session data
   const logout = () => {
     setUser(null);
   };
