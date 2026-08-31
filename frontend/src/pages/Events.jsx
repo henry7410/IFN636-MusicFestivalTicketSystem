@@ -70,26 +70,46 @@ const Events = () => {
 
     return (
 
-        <div>
+        <div
+            style={{
+                maxWidth: '1000px',
+                margin: '0 auto',
+                padding: '20px'
+            }}
+        >
 
-            <h1>My Events</h1>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '20px'
+                }}
+            >
+                <h1>My Events</h1>
 
-            <Link to="/createevent">
-                <button>
-                    Create New Event
-                </button>
-            </Link>
+                <Link to="/createevent">
+                    <button>
+                        Create New Event
+                    </button>
+                </Link>
+            </div>
 
             {events.map((event) => (
 
                 <div
                     key={event._id}
                     style={{
-                        border: '1px solid gray',
-                        margin: '10px',
-                        padding: '10px'
+                        border: '1px solid #ddd',
+                        borderRadius: '10px',
+                        padding: '20px',
+                        marginBottom: '20px',
+                        backgroundColor: '#fff',
+                        boxShadow:
+                            '0px 2px 8px rgba(0,0,0,0.1)'
                     }}
                 >
+
                     <h2>
                         {event.eventName}
                     </h2>
@@ -108,26 +128,37 @@ const Events = () => {
                         {event.ticketQuantity}
                     </p>
 
-                    <Link to="/organizereventdetails">
-                        <button>
-                            View Details
-                        </button>
-                    </Link>
-
-
-                    <Link to="/editevent">
-                        <button>
-                            Edit
-                        </button>
-                    </Link>
-
-                    <button
-                        onClick={() =>
-                            handleDeleteClick(event._id)
-                        }
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: '10px',
+                            marginTop: '15px'
+                        }}
                     >
-                        Delete
-                    </button>
+
+                        <Link to="/organizereventdetails">
+                            <button>
+                                View Details
+                            </button>
+                        </Link>
+
+                        <Link to="/editevent">
+                            <button>
+                                Edit
+                            </button>
+                        </Link>
+
+                        <button
+                            onClick={() =>
+                                handleDeleteClick(
+                                    event._id
+                                )
+                            }
+                        >
+                            Delete
+                        </button>
+
+                    </div>
 
                 </div>
 

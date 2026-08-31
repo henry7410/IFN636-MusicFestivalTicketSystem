@@ -13,12 +13,14 @@ import CreateEvent from './pages/CreateEvent';
 import AvailableEvents from './pages/AvailableEvents';
 import OrganizerEventDetails from './pages/OrganizerEventDetails';
 import EditEvent from './pages/EditEvent';
+import Home from './pages/Home';
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />

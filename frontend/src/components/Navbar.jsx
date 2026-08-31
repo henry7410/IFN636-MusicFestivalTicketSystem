@@ -25,7 +25,7 @@ const Navbar = () => {
         to="/"
         className="text-2xl font-bold"
       >
-        Task Manager
+        FastPass
       </Link>
 
       <div>
