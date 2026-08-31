@@ -10,6 +10,39 @@ const Events = () => {
 
     const [events, setEvents] = useState([]);
 
+    const handleDeleteClick = async (id) => {
+
+        const confirmed = window.confirm(
+            'Are you sure you want to delete this event?'
+        );
+
+        if (!confirmed) return;
+
+        try {
+
+            await axiosInstance.delete(
+                `/api/events/${id}`
+            );
+
+            // SCRUM-147 Remove deleted event from event listing
+            setEvents(
+                events.filter(
+                    (event) =>
+                        event._id !== id
+                )
+            );
+
+            alert('Event deleted successfully');
+
+        } catch (error) {
+
+            alert('Failed to delete event');
+
+        }
+
+    };
+
+
     useEffect(() => {
 
         const fetchEvents = async () => {
@@ -88,7 +121,11 @@ const Events = () => {
                         </button>
                     </Link>
 
-                    <button>
+                    <button
+                        onClick={() =>
+                            handleDeleteClick(event._id)
+                        }
+                    >
                         Delete
                     </button>
 
