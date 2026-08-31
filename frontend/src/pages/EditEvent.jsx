@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axiosInstance from '../axiosConfig';
 
 // SCRUM-139 Create event edit form
 // SCRUM-140 Populate existing event information
@@ -22,6 +23,40 @@ const EditEvent = () => {
 
     const [ticketQuantity, setTicketQuantity] =
         useState('100');
+
+        const handleUpdateEvent = async () => {
+
+            try {
+
+                const response =
+                    await axiosInstance.get(
+                        '/api/events'
+                    );
+
+                const eventId =
+                    response.data[0]._id;
+
+                await axiosInstance.put(
+                    `/api/events/${eventId}`,
+                    {
+                        eventName,
+                        venue,
+                        date,
+                        description,
+                        ticketPrice,
+                        ticketQuantity
+                    }
+                );
+
+                alert('Event updated successfully');
+
+            } catch (error) {
+
+                alert('Failed to update event');
+
+            }
+
+        };
 
     return (
         <div>
@@ -111,7 +146,7 @@ const EditEvent = () => {
 
             <br />
 
-            <button>
+            <button onClick={handleUpdateEvent}>
                 Update Event
             </button>
 
