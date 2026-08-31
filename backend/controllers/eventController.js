@@ -56,7 +56,58 @@ const getEvents = async (req, res) => {
 
 };
 
+// SCRUM-143 Implement event update business logic
+
+const updateEvent = async (req, res) => {
+
+    try {
+
+        const event = await Event.findById(
+            req.params.id
+        );
+
+        if (!event) {
+
+            return res.status(404).json({
+                message: 'Event not found'
+            });
+
+        }
+
+        event.eventName =
+            req.body.eventName;
+
+        event.venue =
+            req.body.venue;
+
+        event.date =
+            req.body.date;
+
+        event.description =
+            req.body.description;
+
+        event.ticketPrice =
+            req.body.ticketPrice;
+
+        event.ticketQuantity =
+            req.body.ticketQuantity;
+
+        await event.save();
+
+        res.json(event);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
 module.exports = {
     createEvent,
-    getEvents
+    getEvents,
+    updateEvent
 };

@@ -12,6 +12,7 @@ import ManageTicket from './pages/ManageTicket';
 import CreateEvent from './pages/CreateEvent';
 import AvailableEvents from './pages/AvailableEvents';
 import OrganizerEventDetails from './pages/OrganizerEventDetails';
+import EditEvent from './pages/EditEvent';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/createevent" element={<CreateEvent />} />
         <Route path="/available-events" element={<AvailableEvents />} />
         <Route path="/organizereventdetails" element={<OrganizerEventDetails />}/>
+        <Route path="/editevent" element={<EditEvent />} />
       </Routes>
     </Router>
   );
