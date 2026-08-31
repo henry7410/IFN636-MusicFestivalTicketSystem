@@ -52,7 +52,6 @@ const PurchaseTicket = () => {
 
         }
 
-        setMessage('Ticket purchased successfully.');
     };
 
     // SCRUM-99 Create ticket purchase page
