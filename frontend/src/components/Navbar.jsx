@@ -17,9 +17,17 @@ const Navbar = () => {
       <div>
         {user ? (
           <>
-            <Link to="/tasks" className="mr-4">Tasks</Link>
+            <Link to="/events" className="mr-4">
+            Home
+            </Link>
+            <Link to="/mytickets" className="mr-4">
+            My Tickets
+            </Link>
+
+            <Link to="/profile" className="mr-4">
+            Profile
+            </Link>
             <Link to="/purchase" className="mr-4">Purchase Ticket</Link>
-            <Link to="/profile" className="mr-4">Profile</Link>
             {/* SCRUM-95 Create logout button */}
             <button
               onClick={handleLogout}
