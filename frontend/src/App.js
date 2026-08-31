@@ -8,6 +8,7 @@ import Events from './pages/Events';
 import PurchaseTicket from './pages/PurchaseTicket';
 import EventDetails from './pages/EventDetails';
 import MyTickets from './pages/MyTickets';
+import ManageTicket from './pages/ManageTicket';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/purchase" element={<PurchaseTicket />} />
         <Route path="/eventdetails" element={<EventDetails />} />
         <Route path="/mytickets" element={<MyTickets />} />
+        <Route path="/manageticket" element={<ManageTicket />} />
       </Routes>
     </Router>
   );

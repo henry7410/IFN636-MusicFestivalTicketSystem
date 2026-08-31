@@ -12,9 +12,20 @@ const bookingSchema = new mongoose.Schema({
     },
 
     purchaseDate: {
-        type: Date,
-        default: Date.now
+    type: Date,
+    default: Date.now
+    },
+
+    recipientName: {
+        type: String,
+        default: ''
+    },
+
+    recipientEmail: {
+        type: String,
+        default: ''
     }
+
 });
 
 module.exports = mongoose.model('Booking', bookingSchema);
