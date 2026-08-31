@@ -1,4 +1,5 @@
 // SCRUM-109 Create available events page
+import { Link } from 'react-router-dom';
 
 const Events = () => {
 
@@ -47,9 +48,11 @@ const Events = () => {
 
                     <p>Price: ${event.price}</p>
 
-                    <button>
-                        View Details
-                    </button>
+                    <Link to="/eventdetails">
+                        <button>
+                            View Details
+                        </button>
+                    </Link>
                 </div>
             ))}
         </div>

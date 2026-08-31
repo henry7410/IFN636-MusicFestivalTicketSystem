@@ -6,6 +6,7 @@ import Profile from './pages/Profile';
 import Tasks from './pages/Tasks';
 import Events from './pages/Events';
 import PurchaseTicket from './pages/PurchaseTicket';
+import EventDetails from './pages/EventDetails';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/events" element={<Events />} />
         <Route path="/purchase" element={<PurchaseTicket />} />
+        <Route path="/eventdetails" element={<EventDetails />} />
       </Routes>
     </Router>
   );
