@@ -31,6 +31,12 @@ const Events = () => {
         <div>
             <h1>Upcoming Featured Festivals</h1>
 
+            <Link to="/createevent">
+                <button>
+                    Create New Event
+                </button>
+            </Link>
+
             {events.map((event) => (
                 <div
                     key={event.id}
