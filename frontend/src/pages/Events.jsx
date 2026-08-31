@@ -75,9 +75,12 @@ const Events = () => {
                         {event.ticketQuantity}
                     </p>
 
-                    <button>
-                        View Details
-                    </button>
+                    <Link to="/organizereventdetails">
+                        <button>
+                            View Details
+                        </button>
+                    </Link>
+
 
                     <button>
                         Edit
