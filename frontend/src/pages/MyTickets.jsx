@@ -24,6 +24,9 @@ const MyTickets = () => {
                         ticket._id !== id
                 )
             );
+            alert(
+                'Ticket cancelled and returned to available inventory.'
+            );
 
         } catch (error) {
 
