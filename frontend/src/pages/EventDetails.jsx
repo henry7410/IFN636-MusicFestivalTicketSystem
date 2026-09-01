@@ -44,6 +44,7 @@ const EventDetails = () => {
     }
 
     return (
+
         <div
             style={{
                 maxWidth: '1200px',
@@ -67,6 +68,7 @@ const EventDetails = () => {
             >
                 Festival Banner Image
             </div>
+
             <h1
                 style={{
                     fontSize: '36px',
@@ -93,6 +95,7 @@ const EventDetails = () => {
                     marginBottom: '20px'
                 }}
             >
+
                 <p>
                      {event.venue}
                 </p>
@@ -100,38 +103,54 @@ const EventDetails = () => {
                 <p>
                      {event.date}
                 </p>
+
             </div>
+
             <div
                 style={{
                     display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
                     gap: '40px',
-                    marginTop: '30px',
-                    alignItems: 'flex-start'
+                    marginTop: '30px'
                 }}
             >
 
+                {/* Left Side */}
+
                 <div
                     style={{
-                        flex: 2
+                        flex: 1
                     }}
                 >
+
                     <h3>
                         About The Event
                     </h3>
 
-                    <p>
+                    <p
+                        style={{
+                            lineHeight: '1.8',
+                            maxWidth: '700px'
+                        }}
+                    >
                         {event.description}
                     </p>
+
                 </div>
 
+                {/* Ticket Card */}
+
                 <div
-                style={{
-                    width: '250px',
-                    border: '1px solid #ddd',
-                    borderRadius: '12px',
-                    padding: '20px',
-                    marginTop: '30px'
-                }}
+                    style={{
+                        width: '300px',
+                        minWidth: '300px',
+                        border: '1px solid #ddd',
+                        borderRadius: '12px',
+                        padding: '20px',
+                        boxShadow:
+                            '0px 2px 8px rgba(0,0,0,0.1)'
+                    }}
                 >
 
                     <h3>
@@ -146,33 +165,35 @@ const EventDetails = () => {
                         General Ticket
                     </p>
 
-                    <Link to={`/purchase/${event._id}`}>
+                    <Link
+                        to={`/purchase/${event._id}`}
+                    >
+
                         <button
                             style={{
                                 width: '100%',
                                 padding: '12px',
                                 marginTop: '10px',
-                                border: '1px solid #cfcfcf',
-                                backgroundColor: '#fafafa',
+                                border: 'none',
+                                borderRadius: '8px',
+                                backgroundColor: '#8b5cf6',
+                                color: 'white',
+                                cursor: 'pointer'
                             }}
                         >
                             Purchase Ticket
                         </button>
+
                     </Link>
 
                 </div>
 
             </div>
 
-
-
-            
-
         </div>
 
-        
-        
     );
+
 };
 
 export default EventDetails;
