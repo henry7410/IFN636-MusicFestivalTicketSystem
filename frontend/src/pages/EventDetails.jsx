@@ -146,7 +146,7 @@ const EventDetails = () => {
                         General Ticket
                     </p>
 
-                    <Link to="/purchase">
+                    <Link to={`/purchase/${event._id}`}>
                         <button
                             style={{
                                 width: '100%',

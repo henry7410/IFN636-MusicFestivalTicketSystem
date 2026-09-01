@@ -47,7 +47,7 @@ const Login = () => {
 
             } else {
 
-                navigate('/tasks');
+                navigate('/');
 
             }
 

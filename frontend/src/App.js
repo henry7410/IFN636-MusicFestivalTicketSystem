@@ -44,7 +44,7 @@ function Layout() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/purchase" element={<PurchaseTicket />} />
+        <Route path="/purchase/:id" element={<PurchaseTicket />}/>
         <Route path="/eventdetails/:id" element={<EventDetails />} />
         <Route path="/mytickets" element={<MyTickets />} />
         <Route path="/manageticket" element={<ManageTicket />} />
