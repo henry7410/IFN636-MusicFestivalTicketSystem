@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
-// SCRUM-139 Create event edit form
-// SCRUM-140 Populate existing event information
-
 const EditEvent = () => {
+
+    const { id } = useParams();
 
     const [eventName, setEventName] =
         useState('Brisbane Music Festival');
@@ -24,137 +24,338 @@ const EditEvent = () => {
     const [ticketQuantity, setTicketQuantity] =
         useState('100');
 
-    const [message, setMessage] = useState('');
+    useEffect(() => {
 
-        const handleUpdateEvent = async () => {
+    const fetchEvent = async () => {
 
             try {
 
                 const response =
                     await axiosInstance.get(
-                        '/api/events'
+                        `/api/events/${id}`
                     );
 
-                const eventId =
-                    response.data[0]._id;
-
-                await axiosInstance.put(
-                    `/api/events/${eventId}`,
-                    {
-                        eventName,
-                        venue,
-                        date,
-                        description,
-                        ticketPrice,
-                        ticketQuantity
-                    }
+                setEventName(
+                    response.data.eventName
                 );
 
-                setMessage('Event updated successfully');
+                setVenue(
+                    response.data.venue
+                );
+
+                setDate(
+                    response.data.date
+                );
+
+                setDescription(
+                    response.data.description
+                );
+
+                setTicketPrice(
+                    response.data.ticketPrice
+                );
+
+                setTicketQuantity(
+                    response.data.ticketQuantity
+                );
 
             } catch (error) {
 
-                setMessage('Failed to update event');
+                console.error(error);
 
             }
 
         };
 
+        fetchEvent();
+
+    }, [id]);
+
+    const [message, setMessage] = useState('');
+
+    const handleUpdateEvent = async () => {
+
+        try {
+
+            // const response =
+            //     await axiosInstance.get(
+            //         '/api/events'
+            //     );
+
+            // const eventId =
+            //     response.data[0]._id;
+
+            await axiosInstance.put(
+                `/api/events/${id}`,
+                {
+                    eventName,
+                    venue,
+                    date,
+                    description,
+                    ticketPrice,
+                    ticketQuantity
+                }
+            );
+
+            setMessage(
+                'Event updated successfully'
+            );
+
+        } catch (error) {
+
+            setMessage(
+                'Failed to update event'
+            );
+
+        }
+
+    };
+
     return (
-        <div>
 
-            <h1>Edit Event</h1>
+        <div
+            style={{
+                maxWidth: '900px',
+                margin: '0 auto',
+                padding: '30px'
+            }}
+        >
 
-            <div>
-                <label>Event Name</label>
-                <br />
-                <input
-                    type="text"
-                    value={eventName}
-                    onChange={(e) =>
-                        setEventName(e.target.value)
-                    }
-                />
+            <h1>
+                Edit Event
+            </h1>
+
+            <p
+                style={{
+                    color: '#666',
+                    marginBottom: '25px'
+                }}
+            >
+                Update event information and
+                ticket inventory.
+            </p>
+
+            <div
+                style={{
+                    border: '1px solid #ddd',
+                    borderRadius: '12px',
+                    padding: '30px',
+                    boxShadow:
+                        '0px 2px 8px rgba(0,0,0,0.1)'
+                }}
+            >
+
+                <div
+                    style={{
+                        marginBottom: '20px'
+                    }}
+                >
+                    <label>
+                        Event Name
+                    </label>
+
+                    <input
+                        type="text"
+                        value={eventName}
+                        onChange={(e) =>
+                            setEventName(
+                                e.target.value
+                            )
+                        }
+                        style={{
+                            width: '100%',
+                            padding: '12px',
+                            marginTop: '8px',
+                            borderRadius: '8px',
+                            border: '1px solid #ddd'
+                        }}
+                    />
+                </div>
+
+                <div
+                    style={{
+                        marginBottom: '20px'
+                    }}
+                >
+                    <label>
+                        Venue
+                    </label>
+
+                    <input
+                        type="text"
+                        value={venue}
+                        onChange={(e) =>
+                            setVenue(
+                                e.target.value
+                            )
+                        }
+                        style={{
+                            width: '100%',
+                            padding: '12px',
+                            marginTop: '8px',
+                            borderRadius: '8px',
+                            border: '1px solid #ddd'
+                        }}
+                    />
+                </div>
+
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns:
+                            '1fr 1fr',
+                        gap: '20px',
+                        marginBottom: '20px'
+                    }}
+                >
+
+                    <div>
+
+                        <label>
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            value={date}
+                            onChange={(e) =>
+                                setDate(
+                                    e.target.value
+                                )
+                            }
+                            style={{
+                                width: '100%',
+                                padding: '12px',
+                                marginTop: '8px',
+                                borderRadius: '8px',
+                                border: '1px solid #ddd'
+                            }}
+                        />
+
+                    </div>
+
+                    <div>
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea
+                            value={description}
+                            onChange={(e) =>
+                                setDescription(
+                                    e.target.value
+                                )
+                            }
+                            style={{
+                                width: '100%',
+                                padding: '12px',
+                                marginTop: '8px',
+                                borderRadius: '8px',
+                                border: '1px solid #ddd'
+                            }}
+                        />
+
+                    </div>
+
+                </div>
+
+                <div
+                    style={{
+                        marginBottom: '20px'
+                    }}
+                >
+
+                    <label>
+                        Ticket Price
+                    </label>
+
+                    <input
+                        type="number"
+                        value={ticketPrice}
+                        onChange={(e) =>
+                            setTicketPrice(
+                                e.target.value
+                            )
+                        }
+                        style={{
+                            width: '100%',
+                            padding: '12px',
+                            marginTop: '8px',
+                            borderRadius: '8px',
+                            border: '1px solid #ddd'
+                        }}
+                    />
+
+                </div>
+
+                <div
+                    style={{
+                        marginBottom: '20px'
+                    }}
+                >
+
+                    <label>
+                        Ticket Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        value={ticketQuantity}
+                        onChange={(e) =>
+                            setTicketQuantity(
+                                e.target.value
+                            )
+                        }
+                        style={{
+                            width: '100%',
+                            padding: '12px',
+                            marginTop: '8px',
+                            borderRadius: '8px',
+                            border: '1px solid #ddd'
+                        }}
+                    />
+
+                </div>
+
+                <button
+                    onClick={handleUpdateEvent}
+                    style={{
+                        backgroundColor: '#06b6d4',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        padding: '10px 15px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Update Event
+                </button>
+
+                {message && (
+
+                    <p
+                        style={{
+                            marginTop: '20px',
+                            color:
+                                message.includes(
+                                    'successfully'
+                                )
+                                    ? 'green'
+                                    : 'red'
+                        }}
+                    >
+                        {message}
+                    </p>
+
+                )}
+
             </div>
-
-            <br />
-
-            <div>
-                <label>Venue</label>
-                <br />
-                <input
-                    type="text"
-                    value={venue}
-                    onChange={(e) =>
-                        setVenue(e.target.value)
-                    }
-                />
-            </div>
-
-            <br />
-
-            <div>
-                <label>Date</label>
-                <br />
-                <input
-                    type="date"
-                    value={date}
-                    onChange={(e) =>
-                        setDate(e.target.value)
-                    }
-                />
-            </div>
-
-            <br />
-
-            <div>
-                <label>Description</label>
-                <br />
-                <textarea
-                    value={description}
-                    onChange={(e) =>
-                        setDescription(e.target.value)
-                    }
-                />
-            </div>
-
-            <br />
-
-            <div>
-                <label>Ticket Price</label>
-                <br />
-                <input
-                    type="number"
-                    value={ticketPrice}
-                    onChange={(e) =>
-                        setTicketPrice(e.target.value)
-                    }
-                />
-            </div>
-
-            <br />
-
-            <div>
-                <label>Ticket Quantity</label>
-                <br />
-                <input
-                    type="number"
-                    value={ticketQuantity}
-                    onChange={(e) =>
-                        setTicketQuantity(e.target.value)
-                    }
-                />
-            </div>
-
-            <br />
-
-            <button onClick={handleUpdateEvent}>
-                Update Event
-            </button>
-            <p>{message}</p>
 
         </div>
+
     );
+
 };
 
 export default EditEvent;

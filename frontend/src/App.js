@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Profile from './pages/Profile';
-import Tasks from './pages/Tasks';
 import Events from './pages/Events';
 import PurchaseTicket from './pages/PurchaseTicket';
 import EventDetails from './pages/EventDetails';
@@ -15,6 +13,8 @@ import EditEvent from './pages/EditEvent';
 import Home from './pages/Home';
 import PurchaseSuccess from './pages/PurchaseSuccess';
 import ProtectedRoute from './components/ProtectedRoute';
+import ViewTicket from './pages/ViewTicket';
+import DeleteEventConfirmation from './pages/DeleteEventConfirmation';
 
 function App() {
 
@@ -42,8 +42,6 @@ function Layout() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/tasks" element={<Tasks />} />
         <Route
             path="/purchase/:id"
             element={
@@ -62,7 +60,7 @@ function Layout() {
             }
         />
         <Route
-            path="/manageticket"
+            path="/manageticket/:id"
             element={
                 <ProtectedRoute role="customer">
                     <ManageTicket />
@@ -85,7 +83,7 @@ function Layout() {
               </ProtectedRoute>
           } 
         />
-        <Route path="/organizereventdetails" element={
+        <Route path="/organizereventdetails/:id" element={
               <ProtectedRoute role="organizer">
                   <OrganizerEventDetails />
               </ProtectedRoute>
@@ -93,10 +91,26 @@ function Layout() {
         />
         <Route path="/purchase-success" element={<PurchaseSuccess />}/>
         <Route
-            path="/editevent"
+            path="/editevent/:id"
             element={
                 <ProtectedRoute role="organizer">
                     <EditEvent />
+                </ProtectedRoute>
+            }
+        />
+        <Route
+            path="/viewticket/:id"
+            element={
+                <ProtectedRoute role="customer">
+                    <ViewTicket />
+                </ProtectedRoute>
+            }
+        />
+        <Route
+            path="/deleteevent/:id"
+            element={
+                <ProtectedRoute role="organizer">
+                    <DeleteEventConfirmation />
                 </ProtectedRoute>
             }
         />

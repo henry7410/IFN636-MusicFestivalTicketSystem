@@ -49,13 +49,6 @@ const Navbar = () => {
                 Create Event
               </Link>
 
-              <Link
-                to="/profile"
-                className="mr-4"
-              >
-                Profile
-              </Link>
-
               <button
                 onClick={handleLogout}
                 className="bg-red-500 px-4 py-2 rounded hover:bg-red-700"
@@ -68,10 +61,10 @@ const Navbar = () => {
 
             <>
               <Link
-                to="/available-events"
+                to="/"
                 className="mr-4"
               >
-                Available Events
+                Home
               </Link>
 
               <Link
@@ -79,13 +72,6 @@ const Navbar = () => {
                 className="mr-4"
               >
                 My Tickets
-              </Link>
-
-              <Link
-                to="/profile"
-                className="mr-4"
-              >
-                Profile
               </Link>
 
               <button

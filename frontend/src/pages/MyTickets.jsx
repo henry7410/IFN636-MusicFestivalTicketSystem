@@ -12,6 +12,14 @@ const MyTickets = () => {
 
     const handleCancel = async (id) => {
 
+        const confirmed = window.confirm(
+            'Are you sure you want to cancel this ticket?'
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
         try {
 
             await axiosInstance.delete(
@@ -19,10 +27,11 @@ const MyTickets = () => {
             );
 
             setTickets(
-                tickets.filter(
-                    (ticket) =>
-                        ticket._id !== id
-                )
+                (currentTickets) =>
+                    currentTickets.filter(
+                        (ticket) =>
+                            ticket._id !== id
+                    )
             );
             alert(
                 'Ticket cancelled and returned to available inventory.'
@@ -152,21 +161,25 @@ const MyTickets = () => {
                             }}
                         >
 
-                            <button
-                                style={{
-                                    backgroundColor: '#0ea5e9',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '6px',
-                                    padding: '8px 12px',
-                                    cursor: 'pointer'
-                                }}
+                            <Link
+                                to={`/viewticket/${ticket._id}`}
                             >
-                                View Ticket
-                            </button>
+                                <button
+                                    style={{
+                                        backgroundColor: '#0ea5e9',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        padding: '8px 12px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    View Ticket
+                                </button>
+                            </Link>
 
                             <Link
-                                to="/manageticket"
+                                to={`/manageticket/${ticket._id}`}
                             >
                                 <button
                                     style={{

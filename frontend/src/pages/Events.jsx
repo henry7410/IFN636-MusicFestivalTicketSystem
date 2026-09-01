@@ -2,46 +2,9 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axiosInstance from '../axiosConfig';
 
-// SCRUM-134 Create organizer event dashboard
-// SCRUM-135 Connect dashboard to backend API
-// SCRUM-137 Display created events list
-
 const Events = () => {
 
     const [events, setEvents] = useState([]);
-
-    const handleDeleteClick = async (id) => {
-
-        const confirmed = window.confirm(
-            'Are you sure you want to delete this event?'
-        );
-
-        if (!confirmed) return;
-
-        try {
-
-            await axiosInstance.delete(
-                `/api/events/${id}`
-            );
-
-            // SCRUM-147 Remove deleted event from event listing
-            setEvents(
-                events.filter(
-                    (event) =>
-                        event._id !== id
-                )
-            );
-
-            alert('Event deleted successfully');
-
-        } catch (error) {
-
-            alert('Failed to delete event');
-
-        }
-
-    };
-
 
     useEffect(() => {
 
@@ -72,9 +35,9 @@ const Events = () => {
 
         <div
             style={{
-                maxWidth: '1000px',
+                maxWidth: '1200px',
                 margin: '0 auto',
-                padding: '20px'
+                padding: '30px'
             }}
         >
 
@@ -86,83 +49,171 @@ const Events = () => {
                     marginBottom: '20px'
                 }}
             >
-                <h1>My Events</h1>
+
+                <div>
+
+                    <h1>
+                        My Events
+                    </h1>
+
+                    <p
+                        style={{
+                            color: '#666'
+                        }}
+                    >
+                        Manage your events and ticket inventory.
+                    </p>
+
+                </div>
 
                 <Link to="/createevent">
-                    <button>
-                        Create New Event
+
+                    <button
+                        style={{
+                            backgroundColor: '#8b5cf6',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '8px',
+                            padding: '10px 15px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        + Create New Event
                     </button>
+
                 </Link>
+
             </div>
 
-            {events.map((event) => (
+            <div
+                style={{
+                    marginTop: '30px',
+                    border: '1px solid #ddd',
+                    borderRadius: '12px',
+                    overflow: 'hidden'
+                }}
+            >
 
                 <div
-                    key={event._id}
                     style={{
-                        border: '1px solid #ddd',
-                        borderRadius: '10px',
-                        padding: '20px',
-                        marginBottom: '20px',
-                        backgroundColor: '#fff',
-                        boxShadow:
-                            '0px 2px 8px rgba(0,0,0,0.1)'
+                        display: 'grid',
+                        gridTemplateColumns:
+                            '2fr 1fr 1fr 1.5fr',
+                        padding: '15px',
+                        backgroundColor: '#f5f5f5',
+                        fontWeight: 'bold'
                     }}
                 >
 
-                    <h2>
-                        {event.eventName}
-                    </h2>
+                    <div>
+                        Event Name
+                    </div>
 
-                    <p>
-                        Venue: {event.venue}
-                    </p>
+                    <div>
+                        Date
+                    </div>
 
-                    <p>
-                        Date: {event.date}
-                    </p>
+                    <div>
+                        Remaining Tickets
+                    </div>
 
-                    <p>
-                        Remaining Tickets:
-                        {' '}
-                        {event.ticketQuantity}
-                    </p>
-
-                    <div
-                        style={{
-                            display: 'flex',
-                            gap: '10px',
-                            marginTop: '15px'
-                        }}
-                    >
-
-                        <Link to="/organizereventdetails">
-                            <button>
-                                View Details
-                            </button>
-                        </Link>
-
-                        <Link to="/editevent">
-                            <button>
-                                Edit
-                            </button>
-                        </Link>
-
-                        <button
-                            onClick={() =>
-                                handleDeleteClick(
-                                    event._id
-                                )
-                            }
-                        >
-                            Delete
-                        </button>
-
+                    <div>
+                        Actions
                     </div>
 
                 </div>
 
-            ))}
+                {events.map((event) => (
+
+                    <div
+                        key={event._id}
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns:
+                                '2fr 1fr 1fr 1.5fr',
+                            padding: '15px',
+                            borderTop:
+                                '1px solid #eee',
+                            alignItems: 'center'
+                        }}
+                    >
+
+                        <div>
+                            {event.eventName}
+                        </div>
+
+                        <div>
+                            {event.date}
+                        </div>
+
+                        <div>
+                            {event.ticketQuantity}
+                        </div>
+
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: '10px'
+                            }}
+                        >
+
+                            <Link
+                                to={`/organizereventdetails/${event._id}`}
+                            >
+                                <button
+                                    style={{
+                                        backgroundColor: '#0ea5e9',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        padding:
+                                            '8px 12px'
+                                    }}
+                                >
+                                    View
+                                </button>
+                            </Link>
+
+                            <Link
+                                to={`/editevent/${event._id}`}
+                            >
+                                <button
+                                    style={{
+                                        backgroundColor: '#06b6d4',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        padding:
+                                            '8px 12px'
+                                    }}
+                                >
+                                    Edit
+                                </button>
+                            </Link>
+
+                            <Link
+                                to={`/deleteevent/${event._id}`}
+                            >
+                                <button
+                                    style={{
+                                        backgroundColor: '#ef4444',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '6px',
+                                        padding: '8px 12px'
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </Link>
+
+                        </div>
+
+                    </div>
+
+                ))}
+
+            </div>
 
         </div>
 
