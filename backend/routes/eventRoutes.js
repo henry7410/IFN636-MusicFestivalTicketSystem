@@ -5,6 +5,7 @@ const router = express.Router();
 const {
     createEvent,
     getEvents,
+    getEventById,
     updateEvent,
     deleteEvent
 } = require('../controllers/eventController');
@@ -12,6 +13,8 @@ const {
 // SCRUM-135 Connect dashboard to backend API
 
 router.get('/', getEvents);
+
+router.get('/:id', getEventById);
 
 // SCRUM-129 Connect event form to backend API
 

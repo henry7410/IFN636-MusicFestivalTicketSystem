@@ -25,7 +25,7 @@ const Navbar = () => {
         to="/"
         className="text-2xl font-bold"
       >
-        FastPass
+        FestPass
       </Link>
 
       <div>
@@ -103,16 +103,9 @@ const Navbar = () => {
           <>
             <Link
               to="/login"
-              className="mr-4"
+              className="bg-purple-600 px-4 py-2 rounded"
             >
               Login
-            </Link>
-
-            <Link
-              to="/register"
-              className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
-            >
-              Register
             </Link>
           </>
 

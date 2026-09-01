@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,9 +16,27 @@ import EditEvent from './pages/EditEvent';
 import Home from './pages/Home';
 
 function App() {
+
   return (
     <Router>
-      <Navbar />
+      <Layout />
+    </Router>
+  );
+
+}
+
+function Layout() {
+
+  const location = useLocation();
+
+  const hideNavbar =
+    location.pathname === '/login' ||
+    location.pathname === '/register';
+
+  return (
+    <>
+      {!hideNavbar && <Navbar />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -27,15 +45,18 @@ function App() {
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/events" element={<Events />} />
         <Route path="/purchase" element={<PurchaseTicket />} />
-        <Route path="/eventdetails" element={<EventDetails />} />
+        <Route path="/eventdetails/:id" element={<EventDetails />} />
         <Route path="/mytickets" element={<MyTickets />} />
         <Route path="/manageticket" element={<ManageTicket />} />
         <Route path="/createevent" element={<CreateEvent />} />
         <Route path="/available-events" element={<AvailableEvents />} />
-        <Route path="/organizereventdetails" element={<OrganizerEventDetails />}/>
+        <Route
+          path="/organizereventdetails"
+          element={<OrganizerEventDetails />}
+        />
         <Route path="/editevent" element={<EditEvent />} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
