@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
 const PurchaseTicket = () => {
     const { id } = useParams();
+
+    const navigate = useNavigate();
 
     // SCRUM-101 Implement ticket quantity selection
     const [quantity, setQuantity] = useState(1);
@@ -63,8 +65,15 @@ const PurchaseTicket = () => {
                 }
             );
 
-            setMessage(
-                'Ticket purchased successfully.'
+            navigate(
+                '/purchase-success',
+                {
+                    state: {
+                        eventName: event.eventName,
+                        quantity,
+                        totalPrice
+                    }
+                }
             );
 
         } catch (error) {

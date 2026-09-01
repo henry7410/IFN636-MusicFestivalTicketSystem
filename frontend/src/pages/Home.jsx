@@ -1,10 +1,33 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '../axiosConfig';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
 
+    const { user } = useAuth();
+
+    const navigate = useNavigate();
+
     const [festivals, setFestivals] = useState([]);
+
+    const handleViewDetails = (eventId) => {
+
+        if (!user) {
+
+            alert(
+                'Please login first to view event details.'
+            );
+
+            navigate('/login');
+
+            return;
+
+        }
+
+        navigate(`/eventdetails/${eventId}`);
+
+    };
 
     useEffect(() => {
 
@@ -186,11 +209,15 @@ const Home = () => {
 
                         <p>${festival.ticketPrice}</p>
 
-                        <Link to={`/eventdetails/${festival._id}`}>
-                            <button>
-                                View Details
-                            </button>
-                        </Link>
+                        <button
+                            onClick={() =>
+                                handleViewDetails(
+                                    festival._id
+                                )
+                            }
+                        >
+                            View Details
+                        </button>
 
                     </div>
 

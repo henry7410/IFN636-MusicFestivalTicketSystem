@@ -10,10 +10,11 @@ import EventDetails from './pages/EventDetails';
 import MyTickets from './pages/MyTickets';
 import ManageTicket from './pages/ManageTicket';
 import CreateEvent from './pages/CreateEvent';
-import AvailableEvents from './pages/AvailableEvents';
 import OrganizerEventDetails from './pages/OrganizerEventDetails';
 import EditEvent from './pages/EditEvent';
 import Home from './pages/Home';
+import PurchaseSuccess from './pages/PurchaseSuccess';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
@@ -43,18 +44,62 @@ function Layout() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/tasks" element={<Tasks />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/purchase/:id" element={<PurchaseTicket />}/>
-        <Route path="/eventdetails/:id" element={<EventDetails />} />
-        <Route path="/mytickets" element={<MyTickets />} />
-        <Route path="/manageticket" element={<ManageTicket />} />
-        <Route path="/createevent" element={<CreateEvent />} />
-        <Route path="/available-events" element={<AvailableEvents />} />
         <Route
-          path="/organizereventdetails"
-          element={<OrganizerEventDetails />}
+            path="/purchase/:id"
+            element={
+                <ProtectedRoute role="customer">
+                    <PurchaseTicket />
+                </ProtectedRoute>
+            }
         />
-        <Route path="/editevent" element={<EditEvent />} />
+        <Route path="/eventdetails/:id" element={<EventDetails />} />
+        <Route
+            path="/mytickets"
+            element={
+                <ProtectedRoute role="customer">
+                    <MyTickets />
+                </ProtectedRoute>
+            }
+        />
+        <Route
+            path="/manageticket"
+            element={
+                <ProtectedRoute role="customer">
+                    <ManageTicket />
+                </ProtectedRoute>
+            }
+        />
+        <Route
+            path="/createevent"
+            element={
+                <ProtectedRoute role="organizer">
+                    <CreateEvent />
+                </ProtectedRoute>
+            }
+        />
+        <Route
+          path="/events"
+          element={
+              <ProtectedRoute role="organizer">
+                  <Events />
+              </ProtectedRoute>
+          } 
+        />
+        <Route path="/organizereventdetails" element={
+              <ProtectedRoute role="organizer">
+                  <OrganizerEventDetails />
+              </ProtectedRoute>
+          }
+        />
+        <Route path="/purchase-success" element={<PurchaseSuccess />}/>
+        <Route
+            path="/editevent"
+            element={
+                <ProtectedRoute role="organizer">
+                    <EditEvent />
+                </ProtectedRoute>
+            }
+        />
       </Routes>
     </>
   );
